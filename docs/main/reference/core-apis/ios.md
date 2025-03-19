@@ -6,50 +6,44 @@ slug: /core-apis/ios
 
 # Capacitor iOS API
 
-Capacitor iOS is the native runtime that powers Capacitor apps on iOS.
+* == native runtime / -- powers -- Capacitor apps | iOS
 
-## Bridge
+## iOS Bridge
 
-The iOS bridge is the heart of the Capacitor iOS library. There are several properties and methods available on the bridge which provide information or change behavior.
+* == Capacitor iOS library's heart / provide
+  * information or
+  * change behavior
 
-When registered with Capacitor, plugins have a weak reference to the bridge:
+* plugins -- have a weak reference to the -- bridge
+  ```swift
+  self.bridge?
+  ```
 
-```swift
-self.bridge?
-```
-
-> If your method requires the bridge, you can use a guard to unwrap it and perform an early exit:
->
-> ```swift
-> guard let bridge = self.bridge else { return }
-> ```
-
----
+* if your method requires the bridge -> use a guard -- to -- 
+  * unwrap it
+  * perform an early exit
+  ```swift
+  guard let bridge = self.bridge else { return }
+  ```
 
 ### viewController
 
-```swift
-var viewController: UIViewController? { get }
-```
-
-This property contains the main view controller for Capacitor, which can be used to present native views over the app.
-
-Examples:
-
-```swift
-DispatchQueue.main.async {
-  self.bridge?.viewController.present(ourCustomViewController, animated: true, completion: nil)
-}
-```
-
-On iPad devices it is possible to present popovers:
-
-```swift
-self.setCenteredPopover(ourCustomViewController)
-self.bridge.viewController.present(ourCustomViewController, animated: true, completion: nil)
-```
-
----
+* MAIN view controller for Capacitor / -- used to PRESENT -- NATIVE views | app
+  ```swift
+  var viewController: UIViewController? { get }
+  ```
+* _Examples:_
+  ```swift
+  DispatchQueue.main.async {
+    self.bridge?.viewController.present(ourCustomViewController, animated: true, completion: nil)
+  }
+  ```
+* | iPad devices,
+  * POSSIBLE to present popovers
+    ```swift
+    self.setCenteredPopover(ourCustomViewController)
+    self.bridge.viewController.present(ourCustomViewController, animated: true, completion: nil)
+    ```
 
 ### config
 
@@ -57,7 +51,7 @@ self.bridge.viewController.present(ourCustomViewController, animated: true, comp
 var config: InstanceConfiguration { get }
 ```
 
-This property contains the configuration object known to the Capacitor runtime.
+* 's property -- about -- Capacitor runtime
 
 ---
 
@@ -66,20 +60,19 @@ This property contains the configuration object known to the Capacitor runtime.
 ```swift
 func triggerJSEvent(eventName: String, target: String)
 func triggerJSEvent(eventName: String, target: String, data: String)
+// data == serialized JSON string value
 ```
 
-Fire an event on a JavaScript [`EventTarget`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) such as `window` or `document`. If possible, it is preferred to use [Plugin Events](/plugins/creating-plugins/ios-guide.md#plugin-events) instead.
+* fire an event | [JavaScript `EventTarget`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget)
+  * _Example:_ `window` or `document`
+* recommendations
+  * use [Plugin Events](/docs/plugins/creating-plugins/ios-guide.md#plugin-events)
 
-Examples:
-
-```swift
-bridge.triggerJSEvent(eventName: "myCustomEvent", target: "window")
-bridge.triggerJSEvent(eventName: "myCustomEvent", target: "document", data: "{ 'dataKey': 'dataValue' }")
-```
-
-Note: `data` must be a serialized JSON string value.
-
----
+* _Examples:_
+  ```swift
+  bridge.triggerJSEvent(eventName: "myCustomEvent", target: "window")
+  bridge.triggerJSEvent(eventName: "myCustomEvent", target: "document", data: "{ 'dataKey': 'dataValue' }")
+  ```
 
 ### localURL(...)
 
@@ -87,12 +80,13 @@ Note: `data` must be a serialized JSON string value.
 func localURL(fromWebURL webURL: URL?) -> URL?
 ```
 
-Translate a URL from the web view into a file URL for native iOS.
-
-The web view may be handling several different types of URLs:
-
-- `res://` (shortcut scheme to web assets)
-- `file://` (fully qualified URL to file on the local device)
+* web view
+  * 's URL -- is translated into a -- file URL | native iOS
+  * may handle DIFFERENT types of URLs
+    * `res://`
+      * == shortcut scheme | web assets
+    * `file://`
+      * == fully qualified URL -- to -- file | local device
 
 ---
 
@@ -102,16 +96,15 @@ The web view may be handling several different types of URLs:
 func portablePath(fromLocalURL localURL: URL?) -> URL?
 ```
 
-Translate a file URL for native iOS into a URL to load in the web view.
+* native iOS's file URL -- is translated into a -- URL / load | web view
 
 ---
 
-## Passing data
-
-Notes on how to work with data that is passed between environments can be [found here](/main/reference/core-apis/data-types.md#ios).
-
----
+## Passing data BETWEEN environments
+ 
+* [here](/docs/main/reference/core-apis/data-types.md#ios)
 
 ## Saving CAPPluginCall
 
-Notes on persisting plugin calls for asynchronous or repeated operations can be [found here](/main/reference/core-apis/saving-calls.md).
+* persisting plugin calls -- for -- asynchronous OR repeated operations 
+* [here](/main/reference/core-apis/saving-calls.md)
