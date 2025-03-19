@@ -1,6 +1,8 @@
 # Capacitor Docs
 
-The official [Capacitor](https://capacitorjs.com) documentation, built with [Docusaurus](https://docusaurus.io/). Based on the [Ionic Docs](https://github.com/ionic-team/ionic-docs)
+* official [Capacitor](https://capacitorjs.com) documentation
+  * built with [Docusaurus](https://docusaurus.io/)
+  * based on the [Ionic Docs](https://github.com/ionic-team/ionic-docs)
 
 ---
 
