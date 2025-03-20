@@ -6,134 +6,100 @@ slug: /getting-started/environment-setup
 
 # Environment Setup
 
-Capacitor has three officially supported application targets: Android, iOS, and Web. In order to create applications for all three platforms, you'll need to install all of the following dependencies. If you are not targeting one of the native mobile targets, you can skip the associated section.
-
-:::info
-Do you need to support Desktops? You can use Capacitor to build [Windows](https://ionic.io/docs/windows/usage) or [Electron](https://github.com/capacitor-community/electron) apps as well!
-:::
+* 👀officially supported application targets 👀
+  * Android,
+  * iOS,
+  * Web
+* for Desktop target -> use
+  * [Windows](https://ionic.io/docs/windows/usage) or
+  * [Electron](https://github.com/capacitor-community/electron) apps
 
 ## Core Requirements
 
-In order to develop any application with Capacitor, you will need NodeJS 20 or higher installed. You can install Node by using the installer on [the Node website](https://nodejs.org), using [Volta](https://volta.sh/): a JavaScript tools manager, or installing it with a package manager like [homebrew](https://brew.sh/), or [Chocolatey](https://chocolatey.org/).
-
-Once you have installed Node, open your terminal of choice and type in the following command to make sure node is properly installed
-
-```bash
-node --version
-# v20.9.0
-```
-
-With Node installed, you can get started with creating Progressive Web Applications (PWA) with Capacitor.
+* NodeJS 20+
+  * enables creating [Progressive Web Applications (PWA)](../web/progressive-web-apps.md)
 
 ## iOS Requirements
 
-To build iOS apps, you will need **macOS**. While there are solutions like [Ionic Appflow](http://ionicframework.com/appflow) that can be used to perform iOS cloud builds if you don't have a Mac, it is highly recommended to have the tools available to you locally in order to properly test your Capacitor application.
-
-In order to develop iOS applications using Capacitor, you will need four additional dependencies:
-
-- Xcode
-- Xcode Command Line Tools
-- Homebrew
-- Cocoapods
-
-Once you've installed the core requirements, as well as Xcode, Xcode Command Line Tools, and Cocoapods, you'll be able to create both iOS applications and PWAs.
+* own a **macOS**
+  * ALTERNATIVES
+    * [Ionic Appflow](http://ionicframework.com/appflow)
+      * -- can perform -- iOS cloud builds
+* dependencies or tools
+  * Xcode
+  * Xcode Command Line Tools
+  * Homebrew
+  * Cocoapods
 
 ### Xcode
 
-Xcode is Apple's IDE for creating native macOS, iOS, and iPadOS applications. You can install Xcode by [using the Apple App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12) on your Mac. Capacitor 7 requires a minimum of Xcode 16.0.
+* == Apple's IDE -- for -- creating native applications
+  * macOS,
+  * iOS,
+  * iPadOS
+* install -- via -- [Apple App Store](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+* | Capacitor 7,
+  * Xcode 16.0+
 
 ### Xcode Command Line Tools
 
-The Xcode command line tools are additional tools not included with the core of Xcode that are required for building and testing your application. Once Xcode has been installed, you can install the Xcode Command Line Tools by running the following command in your terminal:
+* == additional tools / NOT included | Xcode's core
+  * -- required for -- building & testing your application 
 
-```bash
-xcode-select --install
-```
-
-After inputting your password and waiting for a few minutes for the packages to install, you can verify that the tools are installed by running the following command:
-
-```bash
-xcode-select -p
-# /Applications/Xcode.app/Contents/Developer
-```
+* `xcode-select --install` 
+  * install the Xcode Command Line Tools
+  * requirements
+    * having installed PREVIOUSLY Xcode
+  * `xcode-select -p`
+    * check the RIGHT installation
 
 ### Homebrew
 
-Homebrew is a package manager for macOS packages. You need to install it in order to install CocoaPods for both Intel and Apple Silicon Macs.
-
-To install Homebrew, run the following bash command:
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-:::info
-Don't just trust us! This is how [brew.sh](https://brew.sh) recommends installing Homebrew.
-:::
-
-If you do not want to install Homebrew, alternative, but not recommended, instructions can be found below.
+* == package manager -- for -- macOS packages 
+* [how to install](https://brew.sh)
+* Reason why it's required: 🧠RECOMMENDED way to install -- CocoaPods 🧠
 
 ### CocoaPods
 
-Cocoapods is an iOS dependency manager that Capacitor uses to install and manage native dependencies for your iOS project. You can install [CocoaPods](https://cocoapods.org/) by running the following command in your terminal
+* == iOS dependency manager / used by Capacitor -- to -- install & manage native dependencies / your iOS project
 
-```bash
-brew install cocoapods
-```
+#### -- via -- Homebrew
+* `brew install cocoapods`
+* `pod --version`
+  * verify that CocoaPods is installed
 
-You can verify that CocoaPods has installed correctly by running the following command.
-
-```bash
-pod --version
-# 1.12.1
-```
-
-#### Installing CocoaPods without Homebrew
-
-You can install CocoaPods directly with Ruby Gem. To install it, you can run the following command.
-```
-sudo gem install cocoapods
-```
-
-However, installing CocoaPods this way **will not** work on Apple Silicon Macs. You will need to run CocoaPods through Rosetta enabled. To do this, you can run the following commands.
-
-```bash
-sudo arch -x86_64 gem install ffi
-```
-
-Then, whenever you want to update your application to use a newer version of your web code, you will need to run the following commands.
-
-```bash
-npx cap copy
-arch -x86_64 pod install
-```
+#### -- via -- Ruby Gem
+* `sudo gem install cocoapods`
+* | Apple Silicon Macs
+  * ❌NOT valid DIRECTLY ❌
+  * -> run CocoaPods -- through -- Rosetta enabled
+    ```bash
+    sudo arch -x86_64 gem install ffi
+    ```
+  * | update your application / use NEW version of your web code ->
+    ```bash
+    npx cap copy
+    arch -x86_64 pod install
+    ```
 
 ## Android Requirements
 
-In order to develop Android applications using Capacitor, you will need two additional dependencies:
-
-- Android Studio
-- An Android SDK installation
-
-:::note
-You do not need to separately install the Java Development Kit (JDK). Android Studio
-will automatically install the proper JDK for you.
-:::
-
-Once you've installed the core requirements, as well as an Android SDK with Android Studio, you'll be able to create both Android applications and PWAs.
-
 ### Android Studio
 
-Android Studio is Google's IDE for creating native Android applications. You can install Android Studio by going to the [Android Studio download page](https://developer.android.com/studio). Capacitor 7 requires a minimum of Android Studio 2024.2.1.
+* == Google's IDE -- for -- creating native Android applications
+* [Android Studio download page](https://developer.android.com/studio) 
+  * includes JDK
+* |Capacitor 7,
+  * Android Studio 2024.2.1+
 
 ### Android SDK
 
-Once Android Studio has been installed, you need to install an Android SDK package.
+* goal
+  * install
+    * Android SDK Tools
+    * Android SDK Platforms / API 23+
 
-Developing Android apps requires some Android SDK packages to be installed. Make sure to install the Android SDK Tools, and a version of the Android SDK Platforms for API 23 or greater.
-
-In Android Studio, open **Tools -> SDK Manager** from the menu and install the platform versions you'd like to test with in the **SDK Platforms** tab:
-
-![SDK Platforms](/img/v6/docs/android/sdk-platforms.png)
-
-To get started, you only need to install one API version. In the above image, the SDKs for Android 9 (API 28) and Android 10 (API 29) are installed. The latest stable version is Android 15 (API 35).
+* | Android Studio,
+  * **Tools -> SDK Manager** | menu
+  * install the platform versions / like to test with | **SDK Platforms** tab
+    ![SDK Platforms](/img/v6/docs/android/sdk-platforms.png)
