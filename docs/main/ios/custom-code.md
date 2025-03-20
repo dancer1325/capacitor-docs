@@ -9,102 +9,99 @@ slug: /ios/custom-code
 
 # Custom Native iOS Code
 
-With Capacitor, you are encouraged to write Swift or Objective-C code to implement the native features your app needs.
-
-There may not be [a Capacitor plugin](/plugins.mdx) for everything--and that's okay! It is possible to write WebView-accessible native code right in your app.
+* == write WebView-accessible Swift or Objective-C code
+* enable
+  * implement your needed native features
+* alternative
+  * use [a Capacitor plugin](/docs/plugins.mdx)
+    * ❌maybe NOT exist / use case ❌
+    * recommended & easy one
 
 ## WebView-Accessible Native Code
 
-The easiest way to communicate between JavaScript and native code is to build a custom Capacitor plugin that is local to your app.
-
 ### `EchoPlugin.swift`
 
-First, create a `EchoPlugin.swift` file by [opening Xcode](/main/ios/index.md#opening-the-ios-project), right-clicking on the **App** group (under the **App** target), selecting **New File...** from the context menu, choosing **Swift File** in the window, and creating the file.
-
-![New Swift File in Xcode](../../../static/img/v6/docs/ios/xcode-new-swift-file.png)
-
-Copy the following Swift code into `EchoPlugin.swift`:
-
-```swift
-import Capacitor
-
-@objc(EchoPlugin)
-public class EchoPlugin: CAPPlugin, CAPBridgedPlugin {
-    public let identifier = "EchoPlugin"
-    public let jsName = "Echo"
-    public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "echo", returnType: CAPPluginReturnPromise)
-    ]
-
-    @objc func echo(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.resolve(["value": value])
+* steps to create
+  * [opening Xcode](/docs/main/ios/index.md#how-to-open-xcode),
+  * right-clicking | **App** group (under the **App** target),
+  * select **New File...** | context menu,
+  * choose **Swift File** | window,
+  * create the file
+  ![New Swift File in Xcode](../../../static/img/v6/docs/ios/xcode-new-swift-file.png)
+  * copy & paste the code
+    ```swift
+    import Capacitor
+    
+    @objc(EchoPlugin)   // make sure Capacitor's runtime -- can -- see it
+    public class EchoPlugin: CAPPlugin, CAPBridgedPlugin {
+        public let identifier = "EchoPlugin"
+        public let jsName = "Echo"
+        public let pluginMethods: [CAPPluginMethod] = [
+            CAPPluginMethod(name: "echo", returnType: CAPPluginReturnPromise)
+        ]
+    
+        @objc func echo(_ call: CAPPluginCall) {
+            let value = call.getString("value") ?? ""
+            call.resolve(["value": value])
+        }
     }
-}
-```
-
-> The `@objc` decorators are required to make sure Capacitor's runtime (which must use Objective-C for dynamic plugin support) can see it.
+    ```
 
 ### Register the Plugin
 
-We must register custom plugins on both iOS and web so that Capacitor can bridge between Swift and JavaScript.
+* register CUSTOM plugins | iOS & web 
+  * ⚠️MANDATORY ⚠️
+    * Reason: 🧠 Capacitor can bridge between Swift -- & -- JavaScript 🧠
 
 #### `MyViewController.swift`
 
-[Create a custom `MyViewController.swift`](../ios/viewcontroller.md).
-
-Then add a `capacitorDidLoad()` method override and register the plugin:
-
-```swift
-override open func capacitorDidLoad() {
-    bridge?.registerPluginInstance(EchoPlugin())
-}
-```
+* steps
+  * [create a CUSTOM `MyViewController.swift`](../ios/viewcontroller.md)
+  * override `capacitorDidLoad()` / register the plugin
+    ```swift
+    override open func capacitorDidLoad() {
+        bridge?.registerPluginInstance(EchoPlugin())
+    }
+    ```
 
 #### JavaScript
 
-In JS, we use `registerPlugin()` from `@capacitor/core` to create an object which is linked to our Swift plugin.
+* `@capacitor/core`'s `registerPlugin()`
+  * create an object / linked -- to -- OUR Swift plugin
+  ```javascript
+  import { registerPlugin } from '@capacitor/core';
+  
+  // 'Echo' == plugin name == `EchoPlugin.m`'s `CAP_PLUGIN` macro 's second parameter  
+  const Echo = registerPlugin('Echo');
+  
+  export default Echo;
+  ```
 
-```typescript
-import { registerPlugin } from '@capacitor/core';
-
-const Echo = registerPlugin('Echo');
-
-export default Echo;
-```
-
-> The first parameter to `registerPlugin()` is the plugin name, which must match the second parameter to the `CAP_PLUGIN` macro in `EchoPlugin.m`.
-
-**TypeScript**
-
-We can define types on our linked object by defining an interface and using it in the call to `registerPlugin()`.
-
-```diff
- import { registerPlugin } from '@capacitor/core';
-
-+export interface EchoPlugin {
-+  echo(options: { value: string }): Promise<{ value: string }>;
-+}
-
--const Echo = registerPlugin('Echo');
-+const Echo = registerPlugin<EchoPlugin>('Echo');
-
- export default Echo;
-```
-
-The generic parameter of `registerPlugin()` is what defines the structure of the linked object. You can use `registerPlugin<any>('Echo')` to ignore types if you need to. No judgment. ❤️
+  ```diff, typescript
+   import { registerPlugin } from '@capacitor/core';
+  
+  +export interface EchoPlugin {
+  +  echo(options: { value: string }): Promise<{ value: string }>;
+  +}
+  
+  -const Echo = registerPlugin('Echo');
+  +const Echo = registerPlugin<EchoPlugin>('Echo');   // <EchoPlugin>     == linked object's structure
+   
+   // if you want to ignore types -> use registerPlugin<any>('Echo') 
+   export default Echo;
+  ```
 
 ### Use the Plugin
 
-Use the exported `Echo` object to call your plugin methods. The following snippet will call into Swift on iOS and print the result:
-
-```typescript
-import Echo from '../path/to/echo-plugin';
-
-const { value } = await Echo.echo({ value: 'Hello World!' });
-console.log('Response from native:', value);
-```
+* `Echo` object -- can call -- your plugin methods
+  * _Example:_ call into Swift on iOS & print the result
+    ```typescript
+    import Echo from '../path/to/echo-plugin';
+    
+    const { value } = await Echo.echo({ value: 'Hello World!' });
+    console.log('Response from native:', value);
+    ```
 
 ### Next Steps
 
-[Read the iOS Plugin Guide &#8250;](/plugins/creating-plugins/ios-guide.md)
+* [iOS Plugin Guide](/docs/plugins/creating-plugins/ios-guide.md)
