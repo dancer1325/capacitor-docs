@@ -4,45 +4,47 @@ description: Adding a Privacy Manifest to your iOS app
 slug: /ios/privacy-manifest
 ---
 
-Apple recently introduced new [privacy protocols for third-party SDKs](https://developer.apple.com/news/?id=3d8a9yyh) at WWDC23, requiring SDK authors to declare approved reasons for API usage within their SDKs to enhance transparency and user privacy.
+* [NEW privacy protocols / third-party SDKs](https://developer.apple.com/news/?id=3d8a9yyh) | WWDC23
+  * == approved reasons -- for -- API usage | their SDKs
+    * MANDATORY, from May 1st, 2024 
+    * -> App Store Connect -- will notify -- users 
+    * Reason: 🧠enhance transparency & user privacy 🧠
 
-Starting March 13th, 2024, App Store Connect will notify users when a new or updated app is uploaded without approved reasons to access certain APIs.
+## Steps -- to -- meet Requirements
 
-**Starting May 1st, 2024, you will be required to include approved reasons when submitting a new or updated app to App Store Connect.**
-
-## Steps to Meet Requirements
-
-Not all Applications will be flagged but certain plugins such as `@capacitor/filesystem` and `@capacitor/preferences` may necessitate a Privacy Manifest File. If you have received a notification:
-
-1. Update Capacitor to:
-a. `>= 7.0.0` for Capacitor 7
-b. `>= 6.0.0` for Capacitor 6
-c. `>= 5.7.4` for Capacitor 5
-d. `>= 4.8.2` for Capacitor 4
-e. Capacitor <= 3 is not supported
-2. Use either the VS Code Extension to create the privacy manifest file for your app or create it manually.
+* certain plugins -- may necessitate a -- Privacy Manifest File
+  * _Example:_ `@capacitor/filesystem` & `@capacitor/preferences`  
+* steps
+  * Update Capacitor
+    * | Capacitor 7, `>= 7.0.0`
+    * | Capacitor 6, `>= 6.0.0`
+    * | Capacitor 5, `>= 5.7.4`
+    * | Capacitor 4, `>= 4.8.2`
+    * | Capacitor <= 3, ❌NOT supported ❌
+  * create the privacy manifest file -- via --
+    * VS Code Extension
+    * MANUALLY
 
 ### VS Code Extension
 
-Make sure you have the [Ionic VS Code extension](https://ionic.link/vscode) installed and open your project.
-
-Under recommendations you will see *Add Privacy Manifest* if your application is using a plugin that uses certain APIs.
-
-![No Manifest](/img/v6/docs/ios/no-manifest.png)
-
-Choose Yes to create the bare minimum privacy manifest file.
-
-The extension will then list all changes needed as recommendations titled *Missing Privacy Manifest Category*. For example:
-
-![Privacy Change](/img/v6/docs/ios/privacy-change.png)
-
-You must select one of the reason codes to explain how you use the plugin. If you are unsure, click *Docs* to go to the Apple’s documentation on the explanations of each reason code.
-
-Please note that the VS Code extension has a set of rules for known plugins to help you. If you are still being rejected by Apple for missing privacy manifest reasons it may be that you are using a plugin that the extension does not know. You can open an issue on the [VS Code extension issue tracker](https://github.com/ionic-team/vscode-ionic/issues).
+* install [Ionic VS Code extension](https://ionic.link/vscode) 
+* open your project
+  * | recommendations, 
+    * if your application is using a plugin / uses certain APIs -> see *Add Privacy Manifest*
+      ![No Manifest](/static/img/v6/docs/ios/no-manifest.png)
+    * Choose Yes -- to create the -- bare minimum privacy manifest file -> extension -- will list -- ALL changes / needed as recommendations "*Missing Privacy Manifest Category*"
+      ![Privacy Change](/static/img/v6/docs/ios/privacy-change.png)
+    * select 1 reason codes / explain how you use the plugin
+      * if you are unsure -> click *Docs*
+    * if you are STILL being rejected by Apple -- for -- missing privacy manifest reasons
+      * Possible Reason: 🧠you are using a plugin / extension does NOT know 🧠
+        * == VS Code extension -- has a -- set of rules for known plugins 
+      * Note: open an issue | [VS Code extension issue tracker](https://github.com/ionic-team/vscode-ionic/issues)
 
 ### Manual Steps
 
-If you would prefer to perform the steps for creating a Privacy Manifest file manually open Xcode then:
+* TODO: 
+* If you would prefer to perform the steps for creating a Privacy Manifest file manually open Xcode then:
 
 Choose *File > New File*.
 
@@ -54,7 +56,8 @@ Check your app in the *Targets* list.
 
 Click *Create*.
 
-A file called `PrivacyInfo.xcprivacy` will be created. This file is challenging to create interactively in the Xcode UI so it may be easier to edit it manually by right clicking it and choosing *Open with External Editor*.
+A file called `PrivacyInfo.xcprivacy` will be created.
+This file is challenging to create interactively in the Xcode UI so it may be easier to edit it manually by right clicking it and choosing *Open with External Editor*.
 
 As a sample file here is a `PrivacyInfo.xcprivacy` file that uses the UserDefaults API through its use of the `@capacitor/preferences` plugin.
 
@@ -88,4 +91,5 @@ To choose the correct reason codes (like `CA92.1` in the above example) you will
 
 ## Before Store Submission
 
-Before App store submission you may need to disclose user tracking, tracking domains or collection of other data types that are unique for your application. See [Apple’s documentation](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files) for more information.
+Before App store submission you may need to disclose user tracking, tracking domains or collection of other data types that are unique for your application. 
+See [Apple’s documentation](https://developer.apple.com/documentation/bundleresources/privacy_manifest_files) for more information.
