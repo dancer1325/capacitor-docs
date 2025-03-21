@@ -8,48 +8,51 @@ sidebar_label: Http
 
 # CapacitorHttp
 
-The Capacitor Http API provides native http support via patching `fetch` and `XMLHttpRequest` to use native libraries. It also provides helper methods for native http requests without the use of `fetch` and `XMLHttpRequest`. This plugin is bundled with `@capacitor/core`.
+* == Capacitor Http API 
+* -- provides -- 
+  * NATIVE http support 
+    * -- via -- patching `fetch` & `XMLHttpRequest`
+  * helper methods -- for -- NATIVE http requests / WITHOUT using `fetch` and `XMLHttpRequest`
+* bundled with `@capacitor/core`
 
 ## Configuration
 
-By default, the patching of `window.fetch` and `XMLHttpRequest` to use native libraries is disabled.
-If you would like to enable this feature, modify the configuration below in the `capacitor.config` file.
+* patching of `window.fetch` & `XMLHttpRequest` / use NATIVE libraries
+  * by default, disabled
+  * if you want to enable -> modify | `capacitor.config`
 
 | Prop          | Type                 | Description                                                                          | Default            |
 | ------------- | -------------------- | ------------------------------------------------------------------------------------ | ------------------ |
 | **`enabled`** | <code>boolean</code> | Enable the patching of `fetch` and `XMLHttpRequest` to use native libraries instead. | <code>false</code> |
 
-### Example Configuration
-
-In `capacitor.config.json`:
-
-```json
-{
-  "plugins": {
-    "CapacitorHttp": {
-      "enabled": true
+* _Example:_
+  * | `capacitor.config.json`
+    ```json
+    {
+      "plugins": {
+        "CapacitorHttp": {
+          "enabled": true
+        }
+      }
     }
-  }
-}
-```
-
-In `capacitor.config.ts`:
-
-```ts
-import { CapacitorConfig } from '@capacitor/cli';
-
-const config: CapacitorConfig = {
-  plugins: {
-    CapacitorHttp: {
-      enabled: true,
-    },
-  },
-};
-
-export default config;
-```
+    ```
+  * | `capacitor.config.ts`
+    ```ts
+    import { CapacitorConfig } from '@capacitor/cli';
+    
+    const config: CapacitorConfig = {
+      plugins: {
+        CapacitorHttp: {
+          enabled: true,
+        },
+      },
+    };
+    
+    export default config;
+    ```
 
 ## Example
+* TODO: add [here](/examples/newCapacitorApp)
 
 ```typescript
 import { CapacitorHttp } from '@capacitor/core';
@@ -86,7 +89,11 @@ const doPost = () => {
 
 ## Large File Support
 
-Due to the nature of the bridge, parsing and transferring large amount of data from native to the web can cause issues. Support for downloading and uploading files to the native device is planned to be added to the `@capacitor/filesystem` plugin in the near future. One way to potentially circumvent the issue of running out of memory in the meantime (specifically on Android) is to edit the `AndroidManifest.xml` and add `android:largeHeap="true"` to the `application` element. Most apps should not need this and should instead focus on reducing their overall memory usage for improved performance. Enabling this also does not guarantee a fixed increase in available memory, because some devices are constrained by their total available memory.
+Due to the nature of the bridge, parsing and transferring large amount of data from native to the web can cause issues. 
+Support for downloading and uploading files to the native device is planned to be added to the `@capacitor/filesystem` plugin in the near future. 
+One way to potentially circumvent the issue of running out of memory in the meantime (specifically on Android) is to edit the `AndroidManifest.xml` and add `android:largeHeap="true"` to the `application` element. 
+Most apps should not need this and should instead focus on reducing their overall memory usage for improved performance. 
+Enabling this also does not guarantee a fixed increase in available memory, because some devices are constrained by their total available memory.
 
 ## API
 
@@ -664,7 +671,9 @@ This Fetch API interface allows you to perform various actions on HTTP request a
 
 Construct a type with a set of properties K of type T
 
-<code>{ [P in K]: T; }</code>
+<code>{
+ [P in K]: T;
+ }</code>
 
 
 #### RequestMode
