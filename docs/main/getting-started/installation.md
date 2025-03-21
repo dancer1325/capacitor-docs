@@ -21,6 +21,7 @@ slug: /getting-started
 * `npm init @capacitor/app@latest`
   * `@capacitor/create-app`
     * == package -- to quickly create a -- Capacitor application
+* _Example:_ [here](/examples/newCapacitorApp)
 
 ### Add Capacitor | EXISTING web app
 
@@ -63,3 +64,4 @@ slug: /getting-started
     * sync your web application -- to -- your native project
       * built web bundle expected | [Capacitor Config](/docs/config)'s `webDir` -- will be copied to -- your native project
       * install the native project's dependencies
+* _Example:_ [here](/examples/angularApp)
