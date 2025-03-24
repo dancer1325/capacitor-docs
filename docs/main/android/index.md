@@ -10,13 +10,16 @@ contributors:
 
 # Capacitor Android Documentation
 
+* TODO:
 Capacitor features a native Android runtime that enables developers to communicate between JavaScript and Native Java or Kotlin code.
 
 Capacitor Android apps are configured and managed through Android Studio.
 
 ## Android Support
 
-API 23+ (Android 6 or later) is supported, which represents around 99% of the Android market. Capacitor requires an Android WebView with Chrome version 60 or later. On Android 6, and 10+ Capacitor uses the [Android System WebView](https://play.google.com/store/apps/details?id=com.google.android.webview). On Android 7-9, [Google Chrome](https://play.google.com/store/apps/details?id=com.android.chrome) provides the WebView.
+API 23+ (Android 6 or later) is supported, which represents around 99% of the Android market. Capacitor requires an Android WebView with Chrome version 60 or later. 
+On Android 6, and 10+ Capacitor uses the [Android System WebView](https://play.google.com/store/apps/details?id=com.google.android.webview). 
+On Android 7-9, [Google Chrome](https://play.google.com/store/apps/details?id=com.android.chrome) provides the WebView.
 
 ## Adding the Android Platform
 
@@ -74,10 +77,5 @@ If you encountered any issues while getting started, you can consult the [Androi
 
 If your app ran you are now ready to continue developing and building your app. Use the various APIs available, Capacitor or Cordova plugins, or custom native code to build out the rest of your app.
 
-## Further Reading
-
-Follow these Android-specific guides for more information on setting permissions for your app, updating dependencies, building plugins, and more:
-
-[Configuring and setting permissions for Android &#8250;](/main/android/configuration.md)
-
-[Building Native Plugins for Android &#8250;](/plugins/creating-plugins/android-guide.md)
+## Example
+* _Example:_ [here](/examples/angularApp)
