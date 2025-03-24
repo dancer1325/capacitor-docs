@@ -46,11 +46,12 @@ npx cap add ios
 
 ## How to run?
 
-### -- via -- CL
-
 * valid to run |
   * device or
   * simulator
+
+### -- via -- CL
+
 * 
   ```bash
   npx cap run ios
