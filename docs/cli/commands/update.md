@@ -8,25 +8,22 @@ sidebar_label: update
 
 # Capacitor CLI - cap update
 
-Updates the native plugins and dependencies referenced in `package.json`.
-
-```bash
-npx cap update [<platform>]
-```
-
-<strong>Inputs:</strong>
-
-- `platform` (optional): `android`, `ios`
-
-<strong>Options:</strong>
-
-- `--deployment`: Podfile.lock won't be deleted and pod install will use `--deployment` option.
+* updates the NATIVE 
+  * plugins / referenced | `package.json`
+  * dependencies / referenced | `package.json`
+* `npx cap update [<platform>] [options]`
+  * `platform`
+    * ALLOWED values
+      * `android`,
+      * `ios`
+  * ALLOWED options
+    * `--deployment`
+      * ❌Podfile.lock -- will NOT be -- deleted ❌
+      * pod install -- will use -- `--deployment` 
 
 ## Hooks
 
-The following hooks are available for update command:
-
-- `capacitor:update:before`
-- `capacitor:update:after`
-
-[More information](../hooks)
+* ALLOWED ones
+  * `capacitor:copy:before`
+  * `capacitor:copy:after`
+* see [here](../hooks)
