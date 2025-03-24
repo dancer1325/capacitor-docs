@@ -8,25 +8,24 @@ sidebar_label: copy
 
 # Capacitor CLI - cap copy
 
-Copy the web app build and Capacitor configuration file into the native platform project. Run this each time you make changes to your web app or change a configuration value.
-
-```bash
-npx cap copy [<platform>]
-```
-
-<strong>Inputs:</strong>
-
-- `platform` (optional): `android`, `ios`
-
-<strong>Options:</strong>
-
-- `--inline`: After syncing, all JS source maps will be inlined allowing for debugging an Android Web View in Chromium based browsers.
+* 💡web app build & Capacitor configuration file -- is copied into the -- NATIVE platform project 💡
+* use cases
+  * run it EACH time / you 
+    * make changes | your web app or
+    * change a configuration value
+* `npx cap copy [<platform>] [options]`
+  * `platform`
+    * ALLOWED values
+      * `android`,
+      * `ios`
+  * ALLOWED options
+    * `--inline`
+      * AFTER syncing, ALL JS source maps -- will be -- inlined
+        * -> enable debugging an Android Web View | Chromium-based browsers
 
 ## Hooks
 
-The following hooks are available for copy command:
-
-- `capacitor:copy:before`
-- `capacitor:copy:after`
-
-[More information](../hooks)
+* ALLOWED ones
+  * `capacitor:copy:before`
+  * `capacitor:copy:after`
+* see [here](../hooks)
